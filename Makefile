@@ -5,7 +5,8 @@ LDFLAGS = -shared -lpam -lpthread -ljansson
 TARGET = pam_parallel.so
 SOURCES = src/pam_parallel.c
 
-.PHONY: all clean
+PREFIX ?= /usr
+TRIPLET ?= $(shell $(CC) -dumpmachine)
 
 all: $(TARGET)
 
@@ -14,3 +15,9 @@ $(TARGET):
 
 clean:
 	rm -f $(TARGET)
+
+install:
+	install -d $(DESTDIR)$(PREFIX)/lib/$(TRIPLET)/security
+	install -m 0644 $(TARGET) $(DESTDIR)$(PREFIX)/lib/$(TRIPLET)/security/
+
+.PHONY: all clean install
