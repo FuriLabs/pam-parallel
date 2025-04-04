@@ -1,0 +1,16 @@
+Source: pam-parallel
+Maintainer: Bardia Moshiri <bardia@furilabs.com>
+Section: misc
+Priority: optional
+Build-Depends: debhelper-compat (= 13),
+               libpam0g-dev,
+               libjansson-dev,
+Standards-Version: 4.7.0
+Vcs-Browser: https://github.com/furilabs/pam-parallel
+Vcs-Git: https://github.com/furilabs/pam-parallel.git
+
+Package: libpam-parallel
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+Description: Parallel PAM allows for multiple PAM services to run at the same time
