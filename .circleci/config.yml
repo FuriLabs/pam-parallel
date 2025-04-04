@@ -1,0 +1,25 @@
+version: 2.1
+
+setup: true
+
+orbs:
+  continuation: circleci/continuation@0.1.2
+  furilabs-buildd: furilabs-buildd/furilabs-buildd-orb@volatile
+
+jobs:
+  setup:
+    executor: continuation/default
+    resource_class: small
+    steps:
+      - furilabs-buildd/checkout
+      - furilabs-buildd/generate
+      - continuation/continue:
+          configuration_path: generated_config.yml
+
+workflows:
+  setup:
+    jobs:
+      - setup:
+          filters:
+            tags:
+              only: /^furios\/.*\/.*/
